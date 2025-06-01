@@ -1,37 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Note Taking App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
-    <form method = "POST" action = "{{ url_for('home')}}">
-        <h1></h1>
-        <input type="text" name = "username" placeholder="username">
-        <h1></h1>
-        <input type="password" name="password" placeholder="password">
-        <h1></h1>
-        <input type="submit" value = "Login">
-    </form>
+  <div class="container" id="login-section">
+    <form method="POST" action="{{ url_for('home') }}">
+        <h2>Login</h2>
+        <input type="text" id="username" name = "username" placeholder="Username" />
+        <input type="password" id="password" name = "password" placeholder="Password" />
+        <button id="login-btn">Login</button>
+        <p>Login if you are teacher:   <a href="#"> Log In</a></p>
 
-    <h1>File Upload</h1>
-    <form method="POST" action = "{{ url_for('file') }}" enctype="multipart/form-data">
-        <input type="file" name = "file" accept="text/plain" required="required">
-        <input type="submit" value = "Upload file">
     </form>
-
-    <h1>Convert</h1>
-    <form method="POST" action="{{ url_for('convert') }}" enctype="multipart/form-data">
-        <input type="file" name="file" accept="text/plain" required="required">
-        <input type="submit" value="Upload file">
-    </form>
-
-    <h1>Download</h1>
-    <form method="POST" action="{{ url_for('download') }}" enctype="multipart/form-data">
-        <input type="file" name="file" accept="text/plain" required="required">
-        <input type="submit" value="Upload file">
-    </form>
+  </div>
 
 </body>
 </html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Python Web IDE</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+</head>
+<body>
+  <h2>Web Python IDE</h2>
+  <form id="codeForm">
+    <textarea id="code" name="code">print("Hello, World!")</textarea><br>
+    <button type="submit">Run Code</button>
+  </form>
+  <pre id="output"></pre>
+
+  <script>
+    const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+      lineNumbers: true,
+      mode: "python"
+    });
+
+    document.getElementById("codeForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const code = editor.getValue();
+      const response = await fetch("/run", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ code })
+      });
+      const data = await response.json();
+      document.getElementById("output").innerText = data.output;
+    });
+  </script>
+</body>
+</html>
